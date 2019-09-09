@@ -1,10 +1,12 @@
-from flask import Flask,render_template,redirect
+from flask import Flask,render_template,redirect,url_for
+
+app = Flask(__name__)
 
 links = ["Lögreglan hafði afskipti af nýnasistum"]
 hrefs = ["Logreglan_hafdi_afskipti__af_nynasistum"]
 Logreglan_hafdi_afskipti_af_nynasistum = {
-                                                "Title":"Lögreglan hafði afskipti af nýnasistum",
-                                                "content":"Félagsmenn í nýnasistasamtökunum Norðurvígi komu saman á "
+                                                "title":"Lögreglan hafði afskipti af nýnasistum",
+                                                "mainContent":"Félagsmenn í nýnasistasamtökunum Norðurvígi komu saman á "
                                                 "Lækjartorgi í Reykjavík í dag og dreifðu áróðri sínum. "
                                                 "Tilkynnt var um veru þeirra þar og mætti lögreglan á staðinn."
                                                 "Rafn Hilmar Guðmundsson, aðalvarðstjóri hjá lögreglu "
@@ -23,5 +25,14 @@ Logreglan_hafdi_afskipti_af_nynasistum = {
                                                 "Samtökin eru hluti af norrænni hreyfingu nýnasista.",
                                                 "Writer":"Arnþór",
                                                 "Date":"5.9.2019",
-                                                "Time of Creation": "13:15"
+                                                "Time of Creation": "13:15",
+                                                "image":"police_img.jpg"
                                         }
+
+@app.route('/')
+def index():
+    return render_template('Content.html', cnt=Logreglan_hafdi_afskipti_af_nynasistum,link_data=zip(hrefs,links))
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
