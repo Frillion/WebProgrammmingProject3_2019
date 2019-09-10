@@ -1,9 +1,18 @@
 from flask import Flask,render_template,redirect,url_for
+import time
 
-app = Flask(__name__)
+app = Flask(__name__,static_url_path='/static')
 
-links = ["Lögreglan hafði afskipti af nýnasistum"]
-hrefs = ["Logreglan_hafdi_afskipti__af_nynasistum"]
+links = ["Heim","Lögreglan hafði afskipti af nýnasistum","Samkomulag um örugga skemmti staða og gegn vændi"]
+hrefs = ["/","Logreglan_hafdi_afskipti__af_nynasistum","Samkomulag_um_orugga_skemmti_stada_og_gegn_vaendi"]
+
+Mainpage = {
+                "title":"Fréttir",
+                "Writer":"Friðrik Fannar Söebech",
+                "Date":"10.9.2019",
+                "Time of Creation": "19:22"
+            }
+
 Logreglan_hafdi_afskipti_af_nynasistum = {
                                                 "title":"Lögreglan hafði afskipti af nýnasistum",
                                                 "mainContent":"Félagsmenn í nýnasistasamtökunum Norðurvígi komu saman á "
@@ -29,9 +38,61 @@ Logreglan_hafdi_afskipti_af_nynasistum = {
                                                 "image":"police_img.jpg"
                                         }
 
+Samkomulag_um_orugga_skemmti_stada_og_gegn_vaendi = {
+                                                        "title":"Samkomulag um örugga skemmtistaða og gegn vændi",
+                                                        "mainContent":"Samkomulag um að bæta öryggi á og við skemmtistaði í "
+                                                            "Reykjavík var undirritað í dag, svo og samkomulag um "
+                                                            "að sporna gegn vændi á hótelum og gistiheimilum."
+                                                            "Þetta kemur fram í tilkynningu frá Reykjavíkurborg."
+                                                            "Þar seg­ir að vel hafi gengið að fá starfsfólk "
+                                                            "skemmtistaða til að sækja námskeið og skrifa undir"
+                                                            " yfirlýsingu um að gera sitt til að fyrirbyggja "
+                                                            "allt ofbeldi á skemmtistöðum. Ofbeldi í hvaða mynd"
+                                                            " sem er eigi ekki að líðast; þar með talið "
+                                                            "kynferðisleg áreitni, vændi og mansal, sem og ofbeldi"
+                                                            " sem byggist á fordómum eða hatri, svo sem í garð"
+                                                            " innflytjenda eða hinsegin fólks."
+                                                            "Auk fræðslu fyrir dyraverði og starfsfólk felur"
+                                                            "samkomulagið í sér að farið er í úttektarheimsóknir"
+                                                            "á skemmtistaði. Markmiðið er að efla öryggi borgarbúa"
+                                                            "allra. Forsvarsmenn, rekstraraðilar og starfsfólk"
+                                                            "skemmtistaða, lögreglan, slökkviliðið og"
+                                                            "Reykjavíkurborg líta á sig sem samstarfsaðila enda"
+                                                            "eru hagsmunirnir sameiginlegir, aukið öryggi"
+                                                            "borgaranna."
+                                                            "Einnig gerði borgin, Samtök ferðaþjónustu (SAF),"
+                                                            "fyrir hönd hótela og gististaða í Reykjavík,"
+                                                            "og Lögreglan á höfuðborgarsvæðinu með sér samkomulag"
+                                                            "um að vinna saman að því að uppræta vændi á  hótelum"
+                                                            "og gististöðum."
+                                                            "Markmið samkomulagsins er að skapa ofbeldislaust"
+                                                            "og öruggt umhverfi fyrir gesti og starfsfólk hótela"
+                                                            "og gististaða. Stefnt er að því að vændiskaup verði"
+                                                            "ávallt tilkynnt og vændisseljendum veittar"
+                                                            "upplýsingar um þann stuðning sem þeim stendur til boða."
+                                                            "Aðilar samkomulagsins eru meðvitaðir um að í mörgum "
+                                                            "tilvikum tengjast vændi og mansal órofa böndum þar "
+                                                            "sem vændisseljendur virðast oft ginntir til starfans.",
+                                                        "Writer":"N/A",
+                                                        "Date":"10.9.2019 ",
+                                                        "Time of Creation": "19:49",
+                                                        "image":"vaendi.jpg"
+                                        }
+
 @app.route('/')
 def index():
-    return render_template('Content.html', cnt=Logreglan_hafdi_afskipti_af_nynasistum,link_data=zip(hrefs,links))
+    return render_template('Contentpage.html', cnt=Mainpage,link_data=zip(hrefs,links), subpage = False)
+
+@app.route('/<news>')
+def sub(news):
+    if news == 'Logreglan_hafdi_afskipti__af_nynasistum':
+        return render_template('Contentpage.html', cnt=Logreglan_hafdi_afskipti_af_nynasistum, link_data=zip(hrefs, links), subpage=True)
+    if news == 'Samkomulag_um_orugga_skemmti_stada_og_gegn_vaendi':
+        return render_template('Contentpage.html', cnt=Samkomulag_um_orugga_skemmti_stada_og_gegn_vaendi, link_data=zip(hrefs, links), subpage=True)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return redirect('/')
 
 
 if __name__ == '__main__':

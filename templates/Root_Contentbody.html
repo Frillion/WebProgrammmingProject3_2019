@@ -1,0 +1,13 @@
+{% block Main_content %}
+    <header>
+            <h1>{{cnt['title']}}</h1><br>
+    </header>
+    <ul>
+        {%for i,x in link_data%}
+        <li><a href="{{i}}">{{x}}</a></li>
+        {%endfor%}
+    </ul><br>
+    {%if subpage == True%}
+        {%include 'Contentbody.html'%}
+    {%endif%}
+{% endblock %}
