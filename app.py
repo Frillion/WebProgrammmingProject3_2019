@@ -39,7 +39,8 @@ Logreglan_hafdi_afskipti_af_nynasistum = {
 
 Samkomulag_um_orugga_skemmti_stada_og_gegn_vaendi = {
                                                         "title":"Samkomulag um örugga skemmtistaða og gegn vændi",
-                                                        "mainContent":"Samkomulag um að bæta öryggi á og við skemmtistaði í "
+                                                        "mainContent":"Samkomulag um að bæta öryggi á og við "
+                                                            "skemmtistaði í "
                                                             "Reykjavík var undirritað í dag, svo og samkomulag um "
                                                             "að sporna gegn vændi á hótelum og gistiheimilum."
                                                             "Þetta kemur fram í tilkynningu frá Reykjavíkurborg."
