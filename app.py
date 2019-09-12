@@ -1,5 +1,4 @@
-from flask import Flask,render_template,redirect,url_for
-import time
+from flask import Flask,render_template,redirect,url_for,abort
 
 app = Flask(__name__,static_url_path='/static')
 
@@ -89,10 +88,11 @@ def sub(news):
         return render_template('Contentpage.html', cnt=Logreglan_hafdi_afskipti_af_nynasistum, link_data=zip(hrefs, links), subpage=True)
     if news == 'Samkomulag_um_orugga_skemmti_stada_og_gegn_vaendi':
         return render_template('Contentpage.html', cnt=Samkomulag_um_orugga_skemmti_stada_og_gegn_vaendi, link_data=zip(hrefs, links), subpage=True)
-
+    else:
+        abort(404)
 @app.errorhandler(404)
 def page_not_found(e):
-    return redirect('/')
+    return render_template('notFound.html', subpage=False)
 
 
 if __name__ == '__main__':
