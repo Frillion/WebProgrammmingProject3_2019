@@ -1,4 +1,4 @@
 {% block Main_head %}
     <title>{{cnt['title']}}</title>
-    <link rel="stylesheet" type="text/css" href="/static/Main_page_css.css"/>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='Main_page_css.css')}}"/>
 {% endblock %}
