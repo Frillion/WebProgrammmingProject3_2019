@@ -1,5 +1,7 @@
 from flask import Flask,render_template,redirect,url_for,abort
 
+
+
 app = Flask(__name__,static_url_path='/static')
 
 links = ["Heim","Lögreglan hafði afskipti af nýnasistum","Samkomulag um örugga skemmti staða og gegn vændi"]
@@ -12,8 +14,7 @@ Mainpage = {
                 "Time of Creation": "19:22"
             }
 
-Logreglan_hafdi_afskipti_af_nynasistum = {
-                                                "title":"Lögreglan hafði afskipti af nýnasistum",
+content = {"Logreglan_hafdi_afskipti__af_nynasistum":{"title":"Lögreglan hafði afskipti af nýnasistum",
                                                 "mainContent":"Félagsmenn í nýnasistasamtökunum Norðurvígi komu saman á "
                                                 "Lækjartorgi í Reykjavík í dag og dreifðu áróðri sínum. "
                                                 "Tilkynnt var um veru þeirra þar og mætti lögreglan á staðinn."
@@ -34,11 +35,8 @@ Logreglan_hafdi_afskipti_af_nynasistum = {
                                                 "Writer":"Arnþór",
                                                 "Date":"5.9.2019",
                                                 "Time of Creation": "13:15",
-                                                "image":"police_img.jpg"
-                                        }
-
-Samkomulag_um_orugga_skemmti_stada_og_gegn_vaendi = {
-                                                        "title":"Samkomulag um örugga skemmtistaða og gegn vændi",
+                                                "image":"police_img.jpg"},
+           "Samkomulag_um_orugga_skemmti_stada_og_gegn_vaendi":{"title":"Samkomulag um örugga skemmtistaða og gegn vændi",
                                                         "mainContent":"Samkomulag um að bæta öryggi á og við "
                                                             "skemmtistaði í "
                                                             "Reykjavík var undirritað í dag, svo og samkomulag um "
@@ -76,8 +74,7 @@ Samkomulag_um_orugga_skemmti_stada_og_gegn_vaendi = {
                                                         "Writer":"N/A",
                                                         "Date":"10.9.2019 ",
                                                         "Time of Creation": "19:49",
-                                                        "image":"vaendi.jpg"
-                                        }
+                                                        "image":"vaendi.jpg"}}
 
 @app.route('/')
 def index():
@@ -85,10 +82,8 @@ def index():
 
 @app.route('/<news>')
 def sub(news):
-    if news == 'Logreglan_hafdi_afskipti__af_nynasistum':
-        return render_template('Contentpage.html', cnt=Logreglan_hafdi_afskipti_af_nynasistum, link_data=zip(hrefs, links), subpage=True)
-    if news == 'Samkomulag_um_orugga_skemmti_stada_og_gegn_vaendi':
-        return render_template('Contentpage.html', cnt=Samkomulag_um_orugga_skemmti_stada_og_gegn_vaendi, link_data=zip(hrefs, links), subpage=True)
+    if news in content:
+        return render_template('Contentpage.html', cnt=content[news], link_data=zip(hrefs, links), subpage=True)
     else:
         abort(404)
 @app.errorhandler(404)
