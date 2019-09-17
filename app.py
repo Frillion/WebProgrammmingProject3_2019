@@ -1,7 +1,6 @@
 from flask import Flask,render_template,redirect,url_for,abort
 
 
-
 app = Flask(__name__,static_url_path='/static')
 
 links = ["Heim","Lögreglan hafði afskipti af nýnasistum","Samkomulag um örugga skemmti staða og gegn vændi"]
