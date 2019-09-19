@@ -85,9 +85,6 @@ def sub(news):
         return render_template('Contentpage.html', cnt=content[news], link_data=zip(hrefs, links), subpage=True)
     else:
         abort(404)
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template('notFound.html', subpage=False)
 
 
 if __name__ == '__main__':
